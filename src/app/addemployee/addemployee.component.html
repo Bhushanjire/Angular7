@@ -1,0 +1,44 @@
+
+<form #employeeForm="ngForm" novalidate autocomplete="off">
+<h2 mat-dialog-title>{{data.formButtonLabel}} New Employee</h2>
+    <div class="example-container" style="width: 500px">
+        <mat-form-field>
+          <input type="text" matInput value="{{data.name}}" placeholder="Enter Name"  name="name" [(ngModel)]='name'  required #empName='ngModel' only-alphabet>
+        </mat-form-field>
+        <!-- <input  value="{{data.name}}"> -->
+        
+        <div>
+          <app-customvalidation [displayError]="empName.invalid && empName.errors.required && 
+          (empName.dirty || empName.touched || employeeForm.submitted )" errorMsg="Please Enter Name"></app-customvalidation>
+    </div>
+        <mat-form-field>
+          <input matInput placeholder="Enter Email ID" name="email" [(ngModel)]="email" #empEmail='ngModel' required>
+        </mat-form-field>
+        <div>
+          <app-customvalidation [displayError]="empEmail.invalid && empEmail.errors.required && 
+          (empEmail.dirty || empEmail.touched || employeeForm.submitted )" errorMsg="Please Enter Email ID"></app-customvalidation>
+    </div>
+        <mat-form-field>
+          <input matInput placeholder="Enter Mobile Number" name="mobile_no" [(ngModel)]="mobile_no" required #empMobileNo='ngModel' 
+          OnlyDigit maxlength="10" minlength="10">
+        </mat-form-field>
+        <div>
+          <app-customvalidation [displayError]="empMobileNo.invalid && empMobileNo.errors.required && 
+          (empMobileNo.dirty || empMobileNo.touched || employeeForm.submitted )" errorMsg="Please Enter Mobile No."></app-customvalidation>
+    </div>
+    <div>
+      <app-customvalidation [displayError]="empMobileNo.invalid && empMobileNo.errors.minlength && 
+      (empMobileNo.dirty || empMobileNo.touched || employeeForm.submitted )" errorMsg="Please Enter 10 digit mobile number"></app-customvalidation>
+</div>
+        <button type="submit" mat-button  mat-raised-button color="primary" (click)="saveEmployee(data.id)" name="save" 
+        [disabled]="employeeForm.invalid" >{{data.formButtonLabel}} </button>
+        <br>
+        <button mat-button mat-dialog-close  mat-raised-button color="warn">Cancel</button>
+        </div>
+        </form>
+      
+        
+      
+  
+
+

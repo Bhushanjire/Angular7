@@ -1,0 +1,82 @@
+<button (click)="sendData('Button 1 click')">Send Data from button 1</button><br>
+<button (click)="sendData('Button 2 click')">Send Data from button 2</button><br>
+<button (click)="sendData('Button 3 click')">Send Data from button 3</button><br>
+<button (click)="sendDataLeft('Button 4 click')">Send Data Right to Left</button><br>
+
+
+
+<div style="text-align: center">
+    <img src="../../assets/images/loader.gif" *ngIf ="showHideLogo">
+</div>
+
+<div *ngIf = "userTable" style="text-align: center">
+
+    <br>
+    <!-- <input type="text" placeholder="Search" style="width:300px;height:30px" class="form-control" [(ngModel)]="searchData"> <br><br> -->
+    
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Search" value="" [(ngModel)]="searchData">
+      </mat-form-field>
+    
+    <table border='1' width='100%' cellspacing='0' cellpadding='0' class="table">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Address</th>
+        <!-- <td>Geo</td> -->
+         <th>Phone</th>
+        <th>Website</th>
+        <th>Company</th>  
+    </tr>
+    <tr *ngFor = "let data of userData | searchDataRecord : searchData">
+        <td>{{data.id}}</td>
+        <td>{{data.name}}</td>
+        <td>{{data.email}}</td>
+         <td>{{data.address.street}} {{data.address.suite}} {{data.address.city}} {{data.address.zipcode}}</td>
+        <!-- <td>{{data.geo.lat}}</td> -->
+           <td>{{data.phone}}</td>
+        <td>{{data.website}}</td>
+        <td>{{data.company.name}}</td> 
+        <tr>
+    </tr>
+</table>
+</div>
+
+<br>
+<div>
+    <button type="button" mat-raised-button color="primary" (click)="addNewEmployee()" style="float: right;">Add New</button>
+</div>
+<div *ngIf="emploeeTable" style="text-align: center">
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Search" value="" [(ngModel)]="searchData">
+      </mat-form-field>
+    
+        <table border='1' width='100%' cellspacing='0' cellpadding='0' class="table">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Mobile</th>
+                    <th>Action</th>
+                </tr>
+                <tr *ngFor="let emp of employeeData | searchDataRecord : searchData">
+                        <td>{{emp.id}}</td>
+                        <td>{{emp.name}}</td>
+                        <td>{{emp.email}}</td>
+                        <td>{{emp.mobile}}</td>
+                        <td><i class="material-icons cursorHand" (click)="deleteEmployee(emp.id)">delete</i>&nbsp;
+                            <i class="material-icons cursorHand" (click)="editEmployee(emp.id)">edit</i>
+                        </td>
+                        </tr>
+                        </table>
+
+
+</div>
+
+
+
+<app-footer></app-footer>
+<app-left></app-left>
+
+
